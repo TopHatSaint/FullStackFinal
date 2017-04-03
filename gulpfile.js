@@ -1,38 +1,48 @@
-const gulp = require('gulp');
-const concat = require('gulp-concat');
-const babel = require('gulp-babel');
-const sass = require('gulp-sass');
-const sourcemap = require('gulp-sourcemaps');
-const nodemon = require('gulp-nodemon');
-// const annotate = require('gulp-ng-annotate');
-const paths = {
-  jsSource: ['./public/app/app.js', './public/app/**/*.js'], //there is two files paths so that it will grab app.js first.
-  scssSource: ['./public/styles/*.scss'],
-  server: './server/index.js'
+var gulp = require('gulp');
+var concat = require("gulp-concat");
+var annotate = require("gulp-ng-annotate");
+var sass = require("gulp-sass");
+var nodemon = require('gulp-nodemon');
+
+
+var paths = {
+	jsSource: ['public/app/**/*.js'],
+	sassSource: ['public/**/*.scss'], // Change sass to scss if you want to work with it instead.
+	indexSource: ['public/**/*.html', 'public/**/*.css'],
+	server: ['server/index.js']
 };
-gulp.task('serve', () => {
-  nodemon({
-    'script': paths.server
-  })
-})
-gulp.task('js-bundle', () => {
-  gulp.src(paths.jsSource)
-  .pipe(sourcemap.init())
-  .pipe(babel({
-    presets: ['es2015']
-  }))
-  .pipe(concat('all.js'))
-  .pipe(sourcemap.write('./'))
-  .pipe(gulp.dest('./public/dist'))
+
+gulp.task('serve', function() {
+	nodemon({
+		'script': paths.server
+	});
 });
-gulp.task('scss-bundle', () => {
-  gulp.src(paths.scssSource)
-  .pipe(sass())
-  .pipe(concat('styles.css'))
-  .pipe(gulp.dest('./public/dist'))
+
+gulp.task('sass', function() {
+	gulp.src(paths.sassSource)
+		.pipe(sass())
+		.pipe(concat('bundle.css'))
+		.pipe(gulp.dest('./dist'));
 });
-gulp.task('watch', () => {
-  gulp.watch(paths.jsSource, ['js-bundle'])
-  gulp.watch(paths.scssSource, ['scss-bundle'])
+
+gulp.task('js', function() {
+	gulp.src(paths.jsSource)
+		.pipe(annotate())
+		.pipe(concat('bundle.js'))
+		.pipe(gulp.dest('./dist'));
 });
-gulp.task('default', ['watch', 'serve', 'js-bundle', 'scss-bundle']);
+
+gulp.task('index', function() {
+	gulp.src(paths.indexSource)
+		.pipe(gulp.dest('./dist'));
+});
+
+gulp.task('build', ['js', 'sass', 'index']);
+
+gulp.task('watch', function() {
+	gulp.watch(paths.jsSource, ['js']);
+	gulp.watch(paths.sassSource, ['sass']);
+	gulp.watch(paths.indexSource, ['index']);
+});
+
+gulp.task('default', ['build', 'watch']); // add 'serve' to the array if you want gulp to run nodemon as well.

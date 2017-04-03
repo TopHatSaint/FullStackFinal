@@ -16,7 +16,7 @@ const config = require('./config.js');
  var app = module.exports = express();
  // INITILIZE DEPENDENCIES
  // ============================================================
- app.use(express.static(__dirname + './../public'));
+ app.use(express.static(__dirname + './../dist'));
  app.use(bodyParser.json());
  // MASSIVE SETUP
  // ============================================================
@@ -32,11 +32,11 @@ const config = require('./config.js');
  // ENDPOINTS
  // ============================================================
  // TABLE ENDPOINTS
- // app.get('/api/table', tableController.read);
- // app.get('/api/table/:id', tableController.findTable)
- // app.post('/api/table', tableController.create);
- // app.put('/api/table/:id', tableController.update);
- // app.delete('/api/table/:id', tableController.delete);
+ app.get('/api/table', tableController.read);
+ app.get('/api/table/:id', tableController.findTable)
+ app.post('/api/table', tableController.create);
+ app.put('/api/table/:id', tableController.update);
+ app.delete('/api/table/:id', tableController.delete);
  // LISTEN
  // ============================================================
  var port = config.PORT;
