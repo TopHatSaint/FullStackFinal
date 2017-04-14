@@ -2,9 +2,11 @@ var app = require('../index.js');
 var db = app.get('db');
 
 module.exports = {
+
+
   read: function(req, res, next) {
     db.tables.read_all_tables([],
-    function(erer, results) {
+    function(err, results) {
       if (err) {
         console.error(err);
         return res.send(err);
@@ -24,13 +26,15 @@ module.exports = {
       })
     },
   create: function(req, res, next) {
-    db.tables.create_table([req.body.idea],
-    function(err, table) {
+    console.log(req.body),
+
+    db.tables.create_table([req.body.title, req.body.idea],
+    function(err, results) {
       if(err) {
         console.error(err);
-        return res.send(err);
+        return res.status(500).send(err);
       } else {
-        res.send(results);
+        return res.status(200).send(results);
       }
     });
   },
@@ -46,8 +50,15 @@ module.exports = {
         });
   },
   delete: function(req, res, next) {
-    db.tables.delete_table([req.params.productId], function(err, results) {
-      
-    })
+    db.tables.delete_table([req.params.id], function(err, results) {
+      if(err){
+        console.error(err);
+        return res.send(err);
+      }
+      // if (results.length === 0){
+      //   return res.status(404).send("Here Not Found");
+      // }
+      return  res.send(results);
+    });
   }
 }

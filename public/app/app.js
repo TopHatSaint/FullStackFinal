@@ -17,14 +17,20 @@ var app = angular.module("app", ['ui.router']).config(function($stateProvider, $
     })// HOME STATE
     .state('createTable', {
       url: '/createTable',
-      templateUrl: './views/createTable.html',
-      controller: 'createTableCtrl'
+      templateUrl: './views/create.html',
+      controller: 'createTable'
     })// tableDetail STATE
     .state('tableDetail', {
       url: '/tableDetail',
       templateUrl: './views/tableDetail.html',
       controller: 'tableDetailCtrl'
+    })// EDITTING STATE
+    .state('editIdea', {
+      url: '/edit/:id',
+      templateUrl: './app/routes/home/homeTmpl.html',
+      controller: 'editCtrl'
     });
+
 
 
 
