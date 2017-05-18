@@ -29,13 +29,17 @@ const config = require('./config.js');
  // CONTROLLERS
  // ============================================================
  var tableController = require('./controllers/tableController');
+ //DB SETUP
+//=============================================================
+var dbSetup = require('./services/dbSetup');
+dbSetup.run();
  // ENDPOINTS
  // ============================================================
  // TABLE ENDPOINTS
  app.get('/api/table', tableController.read);
- app.get('/api/table/:id', tableController.findTable)
- app.post('/api/table', tableController.create);
- app.put('/api/table/:id', tableController.update);
+ app.get('/api/table/find', tableController.findTable);
+ app.post('/api/table',  tableController.create);
+ app.put('/api/table/edit/:id', tableController.update);
  app.delete('/api/table/:id', tableController.delete);
  // LISTEN
  // ============================================================
