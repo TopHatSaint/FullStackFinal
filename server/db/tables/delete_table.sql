@@ -1,2 +1,2 @@
 DELETE FROM ideas
-WHERE idea_id = $1
+WHERE id = $1;

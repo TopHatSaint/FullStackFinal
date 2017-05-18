@@ -16,13 +16,13 @@ module.exports = {
     })
   },
   findTable: function(req, res, next) {
-    db.tables.read_table([req.params.id],
-      function(err, results){
+    db.tables.read_table([req.query.id], function(err, results){
         if (err){
           console.log(err);
-          return res.send(err);
+          return res.status(500).send(err);
         }
-        return res.status(200).send(results);
+         console.log(results)
+          return res.status(200).send(results);
       })
     },
   create: function(req, res, next) {
@@ -39,7 +39,12 @@ module.exports = {
     });
   },
   update: function(req, res, next) {
-    db.tables.update_tables([req.body.idea],
+    console.log(req.body)
+    db.tables.update_table([
+      req.params.id,
+      req.body.title,
+      req.body.idea
+      ],
         function(err, results) {
           if(err) {
             console.error(err);
@@ -52,13 +57,15 @@ module.exports = {
   delete: function(req, res, next) {
     db.tables.delete_table([req.params.id], function(err, results) {
       if(err){
+        console.log(req.params.id)
         console.error(err);
         return res.send(err);
       }
       // if (results.length === 0){
       //   return res.status(404).send("Here Not Found");
       // }
-      return  res.send(results);
+      console.log(req.params.id, "success")
+      return res.status(200).send(results);
     });
   }
 }

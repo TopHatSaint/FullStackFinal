@@ -13,9 +13,9 @@ angular.module("app").controller("createTable", function($scope, mainService, $h
   // ============================================================
   // ideaInfo.title = document.getElementbyid('Title').value;
   // ideaInfo.idea = document.getElementbyid('Idea').value;
- $scope.testFunction = function() {
-   console.log("I am Working!")
- }
+ // $scope.testFunction = function() {
+ //   console.log("I am Working!")
+ // }
   $scope.createIdeas = function() {
     mainService.createIdeas($scope.thought)
    $state.go("home");

@@ -1,6 +1,6 @@
 // INITILIZE CONTROLLER
 // ============================================================
-angular.module("app").controller("homeCtrl", function($scope, $window, mainService) {
+angular.module("app").controller("homeCtrl", function($scope, $window, mainService, $state , $stateParams) {
   // VARIABLES
   // ============================================================
 
@@ -16,9 +16,17 @@ $scope.deleteIdeas = function(id) {
   console.log("I'm working!", id);
   mainService.deleteIdeas(id).then(function(response) {
     $window.location.reload();
-    console.log(id);
-  });
-}
 
+  });
+};
+
+// $scope.queryEdit = function() {
+// mainService.getIdea($stateParams.id).then(function(response) {
+//   console.log(response[0]);
+//
+//   console.log('hello')
+//   $scope.editIdea = response[0];
+// });
+// };
 
 });

@@ -27,7 +27,7 @@ var app = angular.module("app", ['ui.router']).config(function($stateProvider, $
     })// EDITTING STATE
     .state('editIdea', {
       url: '/edit/:id',
-      templateUrl: './app/routes/home/homeTmpl.html',
+      templateUrl: './views/editIdea.html',
       controller: 'editCtrl'
     });
 

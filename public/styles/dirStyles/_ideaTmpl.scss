@@ -10,6 +10,10 @@
   font-family: $QS;
   border-radius: 15px;
   word-wrap: break-word;
+  border-left: solid 1px black;
+  border-right: solid 1px black;
+  border-top: solid 1px black;
+  margin-bottom: 20px;
 }
 .delete{
   // position: relative;
@@ -19,4 +23,14 @@
 .icon{
   text-decoration: none;
   color: 	#a53c29;
+}
+.randomAssFacts{
+  // height: 35px;
+  margin-top: 5px;
+  border-radius: 15px;
+  border: solid 1px black;
+  font-family: $QS;
+  text-align: center;
+  background-color: #ade1eb;
+  margin-bottom: 20px;
 }

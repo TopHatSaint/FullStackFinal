@@ -1,5 +1,6 @@
 update ideas
   SET
-    idea = COALESCE($1, name)
+    title = COALESCE($2, title),
+    idea = COALESCE($3, idea)
 WHERE id = $1
 RETURNING *;

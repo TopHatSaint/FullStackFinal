@@ -1,8 +1,8 @@
   CREATE TABLE IF NOT EXISTS ideas (
-    idea_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     title text UNIQUE NOT NULL,
     idea text NOT NULL,
-    fact_id INTEGER
+    fact_id INTEGER DEFAULT 1
   );
 
   CREATE TABLE IF NOT EXISTS facts (

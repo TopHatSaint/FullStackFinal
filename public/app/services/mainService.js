@@ -1,6 +1,6 @@
 // INITILIZE SERVICE
 // ============================================================
-angular.module("app").service("mainService", function($http) {
+angular.module("app").service("mainService", function($http, $stateParams, $state) {
   // CRUD FUNCTIONS
   // ============================================================
   this.getIdeas = function() {
@@ -12,9 +12,13 @@ angular.module("app").service("mainService", function($http) {
     });
   };
   this.getIdea = function(id) {
+    // console.log("MainService", id)
     return $http({
       method: 'GET',
-      url: '/api/table/?_id='+id
+      url: '/api/table/find?id='+ id
+    }).then(function(response) {
+      console.table(response)
+      return response.data
     });
   };
   this.joinIdeas = function(collection){
@@ -24,14 +28,16 @@ angular.module("app").service("mainService", function($http) {
     });
   }
   this.createIdeas = function(thought) {
-    $http.post('/api/table', thought);
+    return $http.post('/api/table', thought);
   }
-  this.editIdea = function(id, collection) {
-    return $http({
-      method: 'PUT',
-      url: "/api/table/" + id,
-      data: collection
-    });
+  this.editIdeas = function(id, editIdea) {
+    return $http.put('/api/table/edit/'+ id, editIdea);
+    // return $http({
+    //   method: 'PUT',
+    //   url: "/api/table/edit" + id,
+    // }).then(function(response) {
+    //   return response.data
+    // });
   };
   this.deleteIdeas = function(id) {
     return $http({

@@ -37,9 +37,9 @@ dbSetup.run();
  // ============================================================
  // TABLE ENDPOINTS
  app.get('/api/table', tableController.read);
- app.get('/api/table/:id', tableController.findTable)
+ app.get('/api/table/find', tableController.findTable);
  app.post('/api/table',  tableController.create);
- app.put('/api/table/:id', tableController.update);
+ app.put('/api/table/edit/:id', tableController.update);
  app.delete('/api/table/:id', tableController.delete);
  // LISTEN
  // ============================================================
